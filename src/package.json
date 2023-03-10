@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/icons-material": "5.11.11",
+    "@mui/material": "latest",
+    "csbbust": "1.0.1",
+    "docs": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "description": "https://github.com/mui/material-ui/blob/v5.11.12/docs/data/material/components/grid/SpacingGrid.js",
+  "devDependencies": {
+    "react-scripts": "latest"
+  },
+  "keywords": [],
+  "name": "shopping-cart"
+}
