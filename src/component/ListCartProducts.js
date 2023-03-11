@@ -1,5 +1,5 @@
 import React from "react";
-import { products } from "./data/product";
+import { products } from "../data/product";
 import PropTypes from "prop-types";
 import {
   Box,

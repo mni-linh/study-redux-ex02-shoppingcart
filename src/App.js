@@ -1,18 +1,10 @@
 import React from "react";
-import { products } from "./data/product";
-import PropTypes from "prop-types";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   AppBar,
   Badge,
   Box,
   Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Container,
-  Grid,
   IconButton,
   Menu,
   Toolbar,
@@ -25,43 +17,43 @@ import {
   TableHead,
   TableBody,
 } from "@mui/material";
-import {
-  decreaseCount,
-  increaseCount,
-  addToCart,
-  removeFromCart,
-} from "./store/actions/counterAction";
+import { addToCart, removeFromCart } from "./store/actions/addAndDelAction";
+import { decreaseCount, increaseCount } from "./store/actions/counterAction";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteOutline } from "@mui/icons-material";
-import ListProducts from "./ListProduct";
-
+import ListCartProducts from "./component/ListCartProducts";
 export default function App() {
+  // state mở cart product
   const [cartOpen, setCartOpen] = React.useState(null);
   const open = Boolean(cartOpen);
-
+  // mở cart product
   const handleOpenCart = (event) => {
     setCartOpen(event.currentTarget);
   };
+  // đóng cart product
   const handleCloseCart = () => {
     setCartOpen(null);
   };
-
+  // Số lượng
   const { counter } = useSelector((state) => state.counter);
   const dispatch = useDispatch();
-
+  // Tăng
   const handleIncrease = () => {
     dispatch(increaseCount());
   };
+  // Giảm
   const handleDecrease = () => {
     dispatch(decreaseCount());
   };
-  const { daThem } = useSelector((state) => state.daThem);
+  //
+  const { cartProduct } = useSelector((state) => state.cartProduct);
   const handleAddToCart = (itemProduct) => {
     dispatch(addToCart(itemProduct));
   };
   const handleRemoveFromCart = (itemProduct) => {
     dispatch(removeFromCart(itemProduct));
   };
+  // const { listProducts } = useSelector((state) => state.products);
 
   // ////////////////////////////////////////////////////////////////////////
   // const [added, setAdded] = React.useState([]);
@@ -92,7 +84,7 @@ export default function App() {
             <Box sx={{ flexGrow: 1 }} />
 
             <IconButton onClick={handleOpenCart}>
-              <Badge badgeContent={daThem.length} color="error">
+              <Badge badgeContent={cartProduct.length} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
@@ -102,7 +94,7 @@ export default function App() {
       </Box>
       {/* chi tiết giỏ hàng */}
       <Menu anchorEl={cartOpen} open={open} onClose={handleCloseCart}>
-        {(daThem.length > 0 && (
+        {(cartProduct.length > 0 && (
           <TableContainer>
             <Table sx={{ minWidth: 600 }} aria-label="spanning table">
               <TableHead>
@@ -114,7 +106,7 @@ export default function App() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {daThem.map((row) => (
+                {cartProduct.map((row) => (
                   <TableRow key={row.id}>
                     <TableCell>{row.name}</TableCell>
                     <TableCell
@@ -159,7 +151,7 @@ export default function App() {
         )}
       </Menu>
       {/* Danh sách sản phẩm */}
-      <ListProducts added={daThem} handleAdded={handleAddToCart} />
+      <ListCartProducts added={cartProduct} handleAdded={handleAddToCart} />
     </>
   );
 }
