@@ -1,5 +1,4 @@
 import React from "react";
-
 import { products } from "./data/product";
 import PropTypes from "prop-types";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -19,71 +18,23 @@ import {
   Toolbar,
   Typography,
   MenuItem,
+  TableContainer,
+  Table,
+  TableCell,
+  TableRow,
+  TableHead,
+  TableBody,
 } from "@mui/material";
-function ListProducts({ added, handleAdded }) {
-  return (
-    <Container>
-      <Box sx={{ my: 2 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Grid container spacing={2} display="flex" justifyContent="center">
-              {products.map((item) => (
-                <Grid key={item.name} item>
-                  <Card
-                    sx={{
-                      height: 280,
-                      width: 180,
-                      backgroundColor: (theme) =>
-                        theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-                    }}
-                  >
-                    <CardMedia component="img" height="150" image={item.img} />
-                    <CardContent>
-                      <Grid
-                        container
-                        spacing={1}
-                        display="flex"
-                        justifyContent="center"
-                      >
-                        <Grid item>
-                          <Typography variant="body2" color="text.secondary">
-                            {item.name}
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <Typography color="error" variant="body2">
-                            {item.price}
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <CardActions disableSpacing>
-                            {added.findIndex(
-                              (itemAdd) => itemAdd.name === item.name
-                            ) !== -1 ? (
-                              <Button>Đã thêm</Button>
-                            ) : (
-                              <Button onClick={() => handleAdded(item)}>
-                                Thêm
-                              </Button>
-                            )}
-                          </CardActions>
-                        </Grid>
-                      </Grid>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-        </Grid>
-      </Box>
-    </Container>
-  );
-}
-ListProducts.propTypes = {
-  added: PropTypes.array,
-  handleAdded: PropTypes.func,
-};
+import {
+  decreaseCount,
+  increaseCount,
+  addToCart,
+  removeFromCart,
+} from "./store/actions/counterAction";
+import { useDispatch, useSelector } from "react-redux";
+import { DeleteOutline } from "@mui/icons-material";
+import ListProducts from "./ListProduct";
+
 export default function App() {
   const [cartOpen, setCartOpen] = React.useState(null);
   const open = Boolean(cartOpen);
@@ -94,23 +45,54 @@ export default function App() {
   const handleCloseCart = () => {
     setCartOpen(null);
   };
-  const [added, setAdded] = React.useState([]);
-  const handleAdded = (value) => {
-    const arrAdded = [...added, value];
-    setAdded(arrAdded);
+
+  const { counter } = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
+
+  const handleIncrease = () => {
+    dispatch(increaseCount());
   };
+  const handleDecrease = () => {
+    dispatch(decreaseCount());
+  };
+  const { daThem } = useSelector((state) => state.daThem);
+  const handleAddToCart = (itemProduct) => {
+    dispatch(addToCart(itemProduct));
+  };
+  const handleRemoveFromCart = (itemProduct) => {
+    dispatch(removeFromCart(itemProduct));
+  };
+
+  // ////////////////////////////////////////////////////////////////////////
+  // const [added, setAdded] = React.useState([]);
+  // const handleAdded = (value) => {
+  //   const arrAdded = [...added, value];
+  //   setAdded(arrAdded);
+  // };
+  // const handleDeleteList = (id) => {
+  //   const arrDeleted = [...added];
+  //   const index = added.findIndex((el) => el.id === id);
+  //   if (index > -1) {
+  //     arrDeleted.splice(index, 1);
+  //   }
+  //   setAdded(arrDeleted);
+  // };
+  // const handleDelete = (id) => {
+  //   const arrAdded = added.filter((item) => item !== id);
+  //   setAdded(arrAdded);
+  //   handleDeleteList(id);
+  // };
+  //
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
             <Box sx={{ flexGrow: 1 }} />
-            {/* <Box
-              sx={{ display: { xs: "flex", md: "flex" } }}
-              open={() => setCartOpen(true)}
-            > */}
+
             <IconButton onClick={handleOpenCart}>
-              <Badge badgeContent={added.length} color="error">
+              <Badge badgeContent={daThem.length} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
@@ -120,13 +102,64 @@ export default function App() {
       </Box>
       {/* chi tiết giỏ hàng */}
       <Menu anchorEl={cartOpen} open={open} onClose={handleCloseCart}>
-        {added.map((item) => (
-          <MenuItem key={item.name}>{item.name}</MenuItem>
-        ))}
-        {/* <MenuItem>ABC</MenuItem> */}
+        {(daThem.length > 0 && (
+          <TableContainer>
+            <Table sx={{ minWidth: 600 }} aria-label="spanning table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Sản phẩm</TableCell>
+                  <TableCell align="center">Số lượng</TableCell>
+                  <TableCell align="right">Tổng giá</TableCell>
+                  <TableCell align="right"> </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {daThem.map((row) => (
+                  <TableRow key={row.id}>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      {(counter > 1 && (
+                        <Button onClick={handleDecrease}>-</Button>
+                      )) || <Button disabled>-</Button>}
+
+                      <Typography sx={{ paddingLeft: 1, paddingRight: 1 }}>
+                        {counter}
+                      </Typography>
+                      <Button onClick={handleIncrease}>+</Button>
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.price} * {counter}
+                    </TableCell>
+                    <TableCell>
+                      <IconButton onClick={() => handleRemoveFromCart(row.id)}>
+                        <DeleteOutline color="error" />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+                <TableRow>
+                  <TableCell />
+                  <TableCell />
+                  <TableCell align="center">Tổng cộng</TableCell>
+                  <TableCell align="right">100.000đ</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )) || (
+          <MenuItem>
+            <Typography>Chưa có sản phẩm nào được thêm.</Typography>
+          </MenuItem>
+        )}
       </Menu>
       {/* Danh sách sản phẩm */}
-      <ListProducts added={added} handleAdded={handleAdded} />
+      <ListProducts added={daThem} handleAdded={handleAddToCart} />
     </>
   );
 }

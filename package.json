@@ -7,7 +7,9 @@
     "csbbust": "1.0.1",
     "docs": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1"
   },
   "description": "https://github.com/mui/material-ui/blob/v5.11.12/docs/data/material/components/grid/SpacingGrid.js",
   "devDependencies": {
