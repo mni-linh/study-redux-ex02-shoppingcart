@@ -1,10 +1,8 @@
-import {
-  DESCREASE_COUNT,
-  INCREASE_COUNT,
-} from "../constants/actionTypes";
+import { products } from "../../data/product";
+import { DESCREASE_COUNT, INCREASE_COUNT } from "../constants/actionTypes";
 const initialState = {
-  counter: 0,
-  cartProduct: [],
+  counter: 1,
+  // cartProduct: [],
 };
 const counterReducers = (state = initialState, action) => {
   switch (action.type) {

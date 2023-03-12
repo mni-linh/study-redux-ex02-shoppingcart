@@ -1,19 +1,21 @@
 import { products } from "../../data/product";
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../constants/actionTypes";
 const initialState = {
-  cartProduct: [],
-  products: products,
+  listProducts: products, // Danh sách các sản phẩm (áp dụng client)
+  listCartProducts: [], // Danh sách các sản phẩm trong giỏ hàng
 };
 const cartProductReducers = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       return {
         ...state,
-        cartProduct: [...state.cartProduct, action.item],
+        listCartProducts: [...state.listCartProducts, action.item],
+        // products: [...state.products.filter((item) => item.id !== action.item)],
+        // action.item.quality: action.item.quality + 1,
       };
     case REMOVE_FROM_CART:
       return {
-        cartProduct: state.cartProduct.filter(
+        listCartProducts: state.listCartProducts.filter(
           (item) => item.id !== action.item
         ),
       };
