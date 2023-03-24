@@ -16,12 +16,6 @@ import {
   TableRow,
   TableHead,
   TableBody,
-  Container,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
 } from "@mui/material";
 import { addToCart, removeFromCart } from "./store/actions/addAndDelAction";
 import { decreaseCount, increaseCount } from "./store/actions/counterAction";
