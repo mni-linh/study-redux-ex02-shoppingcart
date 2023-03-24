@@ -35,15 +35,17 @@ export default function App() {
     setCartOpen(null);
   };
   // Số lượng
-  const { counter } = useSelector((state) => state.counter);
+  // const { counter } = useSelector((state) => state.counter);
+  // const { cartProduct } = useSelector((state) => state.cartProduct.quality);
+
   const dispatch = useDispatch();
   // Tăng
-  const handleIncrease = () => {
-    dispatch(increaseCount());
+  const handleIncrease = (id) => {
+    dispatch(increaseCount(id));
   };
   // Giảm
-  const handleDecrease = () => {
-    dispatch(decreaseCount());
+  const handleDecrease = (id) => {
+    dispatch(decreaseCount(id));
   };
   //
   const listCartProducts = useSelector(
@@ -72,6 +74,7 @@ export default function App() {
             {/* chi tiết giỏ hàng */}
             <Menu anchorEl={cartOpen} open={open} onClose={handleCloseCart}>
               {(listCartProducts.length > 0 && (
+                // console.log("listCartProducts", listCartProducts),
                 <TableContainer>
                   <Table sx={{ minWidth: 600 }} aria-label="spanning table">
                     <TableHead>
@@ -93,16 +96,20 @@ export default function App() {
                               alignItems: "center",
                             }}
                           >
-                            {(counter > 1 && (
-                              <Button onClick={handleDecrease}>-</Button>
-                            )) || <Button disabled>-</Button>}
+                            {/* {(counter < 1 && <Button disabled>-</Button>) || ( */}
+                            <Button onClick={() => handleDecrease(row.id)}>
+                              -
+                            </Button>
+                            {/* )} */}
 
                             <Typography
                               sx={{ paddingLeft: 1, paddingRight: 1 }}
                             >
-                              {counter}
+                              {row.quality}
                             </Typography>
-                            <Button onClick={handleIncrease}>+</Button>
+                            <Button onClick={() => handleIncrease(row.id)}>
+                              +
+                            </Button>
                           </TableCell>
                           <TableCell align="right">
                             {/* {row.price} * {counter} */}

@@ -1,5 +1,6 @@
 import { products } from "../../data/product";
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../constants/actionTypes";
+import counter from "./counterReducers";
 const initialState = {
   listProducts: products, // Danh sách các sản phẩm (áp dụng client)
   listCartProducts: [], // Danh sách các sản phẩm trong giỏ hàng
@@ -10,6 +11,7 @@ const cartProductReducers = (state = initialState, action) => {
       return {
         ...state,
         listCartProducts: [...state.listCartProducts, action.item],
+        // quality: action.item.quality + 1,
         // products: [...state.products.filter((item) => item.id !== action.item)],
         // action.item.quality: action.item.quality + 1,
       };

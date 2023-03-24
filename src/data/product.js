@@ -22,7 +22,7 @@ const products = [
     img: "https://i.pinimg.com/564x/00/d8/1d/00d81d11d8952e0286157c7e93d61cad.jpg",
     name: "Asus rog strix",
     price: formatCurrency({ value: 100000 }),
-    quality: 3,
+    quality: 1,
   },
   {
     id: 1,
@@ -95,6 +95,7 @@ const products = [
     quality: 1,
   },
   {
+    id: 11,
     img: "https://i.pinimg.com/564x/26/5c/28/265c2830a3763575b07324355a38c022.jpg",
     name: "Lenovo legion 15",
     price: formatCurrency({ value: 650000 }),
