@@ -36,7 +36,7 @@ export default function App() {
   };
   // Số lượng
   // const { counter } = useSelector((state) => state.counter);
-  // const { cartProduct } = useSelector((state) => state.cartProduct.quality);
+  // const { cartProduct } = useSelector((state) => state.cartProduct.quantity);
 
   const dispatch = useDispatch();
   // Tăng
@@ -101,11 +101,10 @@ export default function App() {
                               -
                             </Button>
                             {/* )} */}
-
                             <Typography
                               sx={{ paddingLeft: 1, paddingRight: 1 }}
                             >
-                              {row.quality}
+                              {row.quantity}
                             </Typography>
                             <Button onClick={() => handleIncrease(row.id)}>
                               +
@@ -147,6 +146,7 @@ export default function App() {
       <ListCartProducts
         added={listCartProducts}
         handleAdded={handleAddToCart}
+        listProducts={listProducts}
       />
     </>
   );

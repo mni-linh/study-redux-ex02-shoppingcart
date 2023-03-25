@@ -1,5 +1,4 @@
 import React from "react";
-import { products } from "../data/product";
 import PropTypes from "prop-types";
 import {
   Box,
@@ -13,14 +12,14 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function ListProducts({ added, handleAdded }) {
+export default function ListProducts({ added, handleAdded, listProducts }) {
   return (
     <Container>
       <Box sx={{ my: 2 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Grid container spacing={2} display="flex" justifyContent="center">
-              {products.map((item) => (
+              {listProducts.map((item) => (
                 <Grid key={item.name} item>
                   <Card
                     sx={{
@@ -81,4 +80,5 @@ export default function ListProducts({ added, handleAdded }) {
 ListProducts.propTypes = {
   added: PropTypes.array,
   handleAdded: PropTypes.func,
+  listProducts: PropTypes.array,
 };

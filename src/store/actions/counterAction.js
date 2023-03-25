@@ -1,7 +1,6 @@
 import { INCREASE_COUNT, DESCREASE_COUNT } from "../constants/actionTypes";
 
 const increaseCount = (id) => {
-  console.log(id);
   return {
     type: INCREASE_COUNT,
     id,

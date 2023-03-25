@@ -4,6 +4,7 @@ const addToCart = (itemProduct) => {
   return {
     type: ADD_TO_CART,
     item: itemProduct,
+    // firstQuantity: itemProduct.quantity + 1,
   };
 };
 const removeFromCart = (itemProduct) => {

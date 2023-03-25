@@ -7,19 +7,23 @@ const initialState = {
 const counterReducers = (state = initialState, action) => {
   switch (action.type) {
     case INCREASE_COUNT:
-      const newCars = state.cartProduct.map((obj) => {
+      const updateCartQuantity = state.cartProduct.map((obj) => {
         if (obj.id === action.id) {
           return {
             ...obj,
-            quality: obj.quality + 1,
+            quantity: obj.quantity + 1,
           };
         } else {
           return { ...obj };
         }
       });
-      console.log("newCars", newCars);
+      console.log("updateCartQuantity", updateCartQuantity);
+      console.log("cartProducts", state.cartProduct);
 
-      return { cartProduct: newCars };
+      return {
+        cartProduct: updateCartQuantity,
+      };
+
     case DESCREASE_COUNT:
       return {
         ...state,
