@@ -1,13 +1,18 @@
 import { products } from "../../data/product";
-import { DESCREASE_COUNT, INCREASE_COUNT } from "../constants/actionTypes";
+import {
+  ADD_TO_CART,
+  DESCREASE_COUNT,
+  INCREASE_COUNT,
+} from "../constants/actionTypes";
 const initialState = {
   counter: 1,
-  cartProduct: products,
+  listProducts: products, // Mảng danh sách tất cả sản phẩm
+  listCartProducts: [], // Mảng danh sách sản phẩm đã thêm vào giỏ hàng
 };
 const counterReducers = (state = initialState, action) => {
   switch (action.type) {
     case INCREASE_COUNT:
-      const updateCartQuantity = state.cartProduct.map((obj) => {
+      const updateQuantityListProducts = state.listProducts.map((obj) => {
         if (obj.id === action.id) {
           return {
             ...obj,
@@ -17,17 +22,33 @@ const counterReducers = (state = initialState, action) => {
           return { ...obj };
         }
       });
-      console.log("updateCartQuantity", updateCartQuantity);
-      console.log("cartProducts", state.cartProduct);
+      const updateQuantityListCartProducts = state.listCartProducts.map(
+        (item) => {
+          if (item.id === action.id) {
+            return {
+              ...item,
+              quantity: item.quantity + 1,
+            };
+          } else {
+            return { ...item };
+          }
+        }
+      );
 
       return {
-        cartProduct: updateCartQuantity,
+        listProducts: updateQuantityListProducts,
+        listCartProducts: updateQuantityListCartProducts,
       };
 
     case DESCREASE_COUNT:
       return {
         ...state,
         counter: state.counter - 1,
+      };
+    case ADD_TO_CART:
+      return {
+        ...state,
+        listCartProducts: [...state.listCartProducts, action.item],
       };
     default:
       return state;

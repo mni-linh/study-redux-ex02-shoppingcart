@@ -1,4 +1,8 @@
-import { INCREASE_COUNT, DESCREASE_COUNT } from "../constants/actionTypes";
+import {
+  INCREASE_COUNT,
+  DESCREASE_COUNT,
+  ADD_TO_CART,
+} from "../constants/actionTypes";
 
 const increaseCount = (id) => {
   return {
@@ -14,4 +18,11 @@ const decreaseCount = (id) => {
   };
 };
 
-export { increaseCount, decreaseCount };
+const addToCart = (itemProduct) => {
+  return {
+    type: ADD_TO_CART,
+    item: itemProduct,
+  };
+};
+
+export { increaseCount, decreaseCount, addToCart };

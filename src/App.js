@@ -17,8 +17,12 @@ import {
   TableHead,
   TableBody,
 } from "@mui/material";
-import { addToCart, removeFromCart } from "./store/actions/addAndDelAction";
-import { decreaseCount, increaseCount } from "./store/actions/counterAction";
+import { removeFromCart } from "./store/actions/addAndDelAction";
+import {
+  addToCart,
+  decreaseCount,
+  increaseCount,
+} from "./store/actions/counterAction";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteOutline } from "@mui/icons-material";
 import ListCartProducts from "./component/ListCartProducts";
@@ -49,16 +53,21 @@ export default function App() {
   };
   //
   const listCartProducts = useSelector(
-    (state) => state.products.listCartProducts
+    (state) => state.counter.listCartProducts
   );
+
+  console.log("listCartProduct", listCartProducts); // const [array, setArray] = React.useState(listCartProducts);
+  // React.useEffect(() => {
+  //   setArray(listCartProducts);
+  // }, [listCartProducts]);
   const handleAddToCart = (itemProduct) => {
     dispatch(addToCart(itemProduct));
   };
   const handleRemoveFromCart = (itemProduct) => {
     dispatch(removeFromCart(itemProduct));
   };
-  const listProducts = useSelector((state) => state.products.listProducts);
-
+  const listProducts = useSelector((state) => state.counter.listProducts);
+  console.log("listProducts", listProducts);
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -74,7 +83,6 @@ export default function App() {
             {/* chi tiết giỏ hàng */}
             <Menu anchorEl={cartOpen} open={open} onClose={handleCloseCart}>
               {(listCartProducts.length > 0 && (
-                // console.log("listCartProducts", listCartProducts),
                 <TableContainer>
                   <Table sx={{ minWidth: 600 }} aria-label="spanning table">
                     <TableHead>
