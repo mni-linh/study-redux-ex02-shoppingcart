@@ -20,9 +20,9 @@ const cartProductReducers = (state = initialState, action) => {
       };
     case REMOVE_FROM_CART:
       return {
-        listCartProducts: state.listCartProducts.filter(
-          (item) => item.id !== action.item
-        ),
+        listCartProducts: [
+          ...state.listCartProducts.filter((item) => item.id !== action.item),
+        ],
       };
 
     default:

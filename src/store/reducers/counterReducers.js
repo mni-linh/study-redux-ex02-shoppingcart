@@ -49,6 +49,9 @@ const counterReducers = (state = initialState, action) => {
       return {
         ...state,
         listCartProducts: [...state.listCartProducts, action.item],
+        listProducts: state.listProducts.filter(
+          (item) => item.id !== action.item
+        ),
       };
     default:
       return state;

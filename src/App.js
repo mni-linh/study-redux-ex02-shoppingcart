@@ -67,7 +67,7 @@ export default function App() {
     dispatch(removeFromCart(itemProduct));
   };
   const listProducts = useSelector((state) => state.counter.listProducts);
-  console.log("listProducts", listProducts);
+  console.log("listProductsssss", listProducts);
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>

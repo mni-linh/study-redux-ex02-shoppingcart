@@ -49,20 +49,20 @@ export default function ListProducts({ added, handleAdded, listProducts }) {
                         </Grid>
                         <Grid item>
                           <CardActions disableSpacing>
-                            {added.findIndex(
+                            {/* {added.findIndex(
                               (itemAdd) => itemAdd.name === item.name
                             ) !== -1 ? (
                               <Button variant="contained" disabled>
                                 Đã thêm
                               </Button>
-                            ) : (
-                              <Button
-                                variant="contained"
-                                onClick={() => handleAdded(item)}
-                              >
-                                Thêm
-                              </Button>
-                            )}
+                            ) : ( */}
+                            <Button
+                              variant="contained"
+                              onClick={() => handleAdded(item)}
+                            >
+                              Thêm
+                            </Button>
+                            {/* )} */}
                           </CardActions>
                         </Grid>
                       </Grid>

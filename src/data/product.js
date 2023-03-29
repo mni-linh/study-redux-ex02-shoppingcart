@@ -23,6 +23,7 @@ const products = [
     name: "Asus rog strix",
     price: formatCurrency({ value: 100000 }),
     quantity: 1,
+    totalQuantity: 5,
   },
   {
     id: 1,
@@ -30,6 +31,7 @@ const products = [
     name: "Asus tuf gaming",
     price: formatCurrency({ value: 150000 }),
     quantity: 1,
+    totalQuantity: 10,
   },
   {
     id: 2,
@@ -37,6 +39,7 @@ const products = [
     name: "Acer Nitro gaming",
     price: formatCurrency({ value: 200000 }),
     quantity: 1,
+    totalQuantity: 15,
   },
   {
     id: 3,
@@ -44,6 +47,7 @@ const products = [
     name: "Rog zephyus duo",
     price: formatCurrency({ value: 250000 }),
     quantity: 1,
+    totalQuantity: 20,
   },
   {
     id: 4,
@@ -51,6 +55,7 @@ const products = [
     name: "Macbook pro 16",
     price: formatCurrency({ value: 300000 }),
     quantity: 1,
+    totalQuantity: 18,
   },
   {
     id: 5,
@@ -58,6 +63,7 @@ const products = [
     name: "Macbook air m1",
     price: formatCurrency({ value: 350000 }),
     quantity: 1,
+    totalQuantity: 6,
   },
   {
     id: 6,
@@ -65,6 +71,7 @@ const products = [
     name: "MSI gf63 thin",
     price: formatCurrency({ value: 400000 }),
     quantity: 1,
+    totalQuantity: 9,
   },
   {
     id: 7,
@@ -72,6 +79,7 @@ const products = [
     name: "MSI modern 14",
     price: formatCurrency({ value: 450000 }),
     quantity: 1,
+    totalQuantity: 11,
   },
   {
     id: 8,
@@ -79,6 +87,7 @@ const products = [
     name: "Asus zenbook X14",
     price: formatCurrency({ value: 500000 }),
     quantity: 1,
+    totalQuantity: 7,
   },
   {
     id: 9,
@@ -86,6 +95,7 @@ const products = [
     name: "Dell inspiron 16",
     price: formatCurrency({ value: 550000 }),
     quantity: 1,
+    totalQuantity: 4,
   },
   {
     id: 10,
@@ -93,6 +103,7 @@ const products = [
     name: "Dell inspiron 3520",
     price: formatCurrency({ value: 600000 }),
     quantity: 1,
+    totalQuantity: 13,
   },
   {
     id: 11,
@@ -100,6 +111,7 @@ const products = [
     name: "Lenovo legion 15",
     price: formatCurrency({ value: 650000 }),
     quantity: 1,
+    totalQuantity: 18,
   },
 ];
 export { products };
