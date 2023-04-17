@@ -17,30 +17,37 @@ import {
   TableHead,
   TableBody,
 } from "@mui/material";
+import { DeleteOutline } from "@mui/icons-material";
+
+import ListCartProducts from "./component/ListCartProducts";
+
+import { useDispatch, useSelector } from "react-redux";
+
 import { removeFromCart } from "./store/actions/addAndDelAction";
+
 import {
   addToCart,
   decreaseCount,
   increaseCount,
 } from "./store/actions/counterAction";
-import { useDispatch, useSelector } from "react-redux";
-import { DeleteOutline } from "@mui/icons-material";
-import ListCartProducts from "./component/ListCartProducts";
+
 export default function App() {
-  // state mở cart product
+  // state mở / đóng cart product
   const [cartOpen, setCartOpen] = React.useState(null);
   const open = Boolean(cartOpen);
+
   // mở cart product
   const handleOpenCart = (event) => {
     setCartOpen(event.currentTarget);
   };
+
   // đóng cart product
   const handleCloseCart = () => {
     setCartOpen(null);
   };
+
   // Số lượng
   // const { counter } = useSelector((state) => state.counter);
-  // const { cartProduct } = useSelector((state) => state.cartProduct.quantity);
 
   const dispatch = useDispatch();
   // Tăng
@@ -51,23 +58,27 @@ export default function App() {
   const handleDecrease = (id) => {
     dispatch(decreaseCount(id));
   };
-  //
-  const listCartProducts = useSelector(
-    (state) => state.counter.listCartProducts
-  );
-
-  console.log("listCartProduct", listCartProducts); // const [array, setArray] = React.useState(listCartProducts);
-  // React.useEffect(() => {
-  //   setArray(listCartProducts);
-  // }, [listCartProducts]);
+  // Thêm vào giỏ hàng
   const handleAddToCart = (itemProduct) => {
     dispatch(addToCart(itemProduct));
   };
+  // Xóa khỏi giỏ hàng
   const handleRemoveFromCart = (itemProduct) => {
     dispatch(removeFromCart(itemProduct));
   };
+  // Danh sách sản phẩm trong giỏ hàng
+  const listCartProducts = useSelector(
+    (state) => state.counter.listCartProducts
+  );
+  // Danh sách tất cả sản phẩm
   const listProducts = useSelector((state) => state.counter.listProducts);
-  console.log("listProductsssss", listProducts);
+  console.log("listCartProduct", listCartProducts);
+  console.log("listProducts", listProducts);
+  // const [array, setArray] = React.useState(listCartProducts);
+  // React.useEffect(() => {
+  //   setArray(listCartProducts);
+  // }, [listCartProducts]);
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -149,7 +160,6 @@ export default function App() {
           </Toolbar>
         </AppBar>
       </Box>
-
       {/* Danh sách sản phẩm */}
       <ListCartProducts
         added={listCartProducts}
